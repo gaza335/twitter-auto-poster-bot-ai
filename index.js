@@ -25,7 +25,7 @@ async function run() {
 
   // Write your prompt here
   const prompt =
-    "generate a web development content, tips and tricks or something new or some rant or some advice as a tweet, it should not be vague and should be unique; under 280 characters and should be plain text, you can use emojis";
+    "Generate a series of emotionally impactful Twitter posts related to the ongoing situation in Gaza. The tweets should report tragic events with content warnings where appropriate, capturing the gravity of the situation in a sensitive and respectful tone. The posts should be brief, under 280 characters, and formatted in a way similar to @Timesofgaza, including timestamps, mentions of Israeli actions, and explicit content warnings where necessary. Maintain the plain text style without unnecessary vagueness";
 
   const result = await model.generateContent(prompt);
   const response = await result.response;
