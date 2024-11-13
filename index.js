@@ -22,7 +22,6 @@ async function run() {
     model: "gemini-pro",
     generationConfig,
   });
-  
 
   // Write your prompt here
   const prompt =
@@ -33,7 +32,6 @@ async function run() {
   const text = response.text();
   console.log(text);
   sendTweet(text);
-
 }
 
 run();
