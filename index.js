@@ -25,7 +25,7 @@ async function run() {
 
   // Write your prompt here
   const prompt =
-    "Generate emotionally impactful yet compassionate Twitter post related to the ongoing situation in Gaza. The tweet should report tragic event, capturing the gravity of the situation in a sensitive and respectful tone. The posts should be brief, under 280 characters, and formatted in a way similar to @Timesofgaza, mentions of Israeli actions. Maintain the plain text style without unnecessary vagueness and do not repeat the previous post. If there is no new news just talk about the general tragedy";
+    "Generate emotionally impactful yet compassionate Twitter post related to the ongoing situation in Gaza. The tweet should report tragic events new and old mentioning when, capturing the gravity of the situation in a sensitive and respectful tone. The posts should be brief, under 280 characters, and formatted in a way similar to @Timesofgaza, mentions of Israeli actions. Maintain the plain text style without unnecessary vagueness and do not repeat the previous post.do not repeat the previous post. If there is no new news just talk about the general tragedy";
 
   const result = await model.generateContent(prompt);
   const response = await result.response;
