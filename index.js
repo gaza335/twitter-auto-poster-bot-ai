@@ -23,12 +23,6 @@ async function run() {
     generationConfig,
   });
   
-  // Gets image, write prompt
-const imagePrompt =
-    "A somber image representing the suffering of people in Gaza amidst war and destruction, with a focus on hope amidst the devastation.";
-  const imageURL = await generateAIImage(imagePrompt);
-  const imagePath = await downloadImage(imageURL);
-
 
   // Write your prompt here
   const prompt =
@@ -38,7 +32,7 @@ const imagePrompt =
   const response = await result.response;
   const text = response.text();
   console.log(text);
-  await sendTweetWithImage(tweetText, imagePath);
+  sendTweet(text);
 
 }
 
@@ -50,60 +44,5 @@ async function sendTweet(tweetText) {
     console.log("Tweet sent successfully!");
   } catch (error) {
     console.error("Error sending tweet:", error);
-  }
-}
-async function generateAIImage(imagePrompt) {
-  try {
-    const response = await axios.post(
-      "https://api.dalle.ai/generate", // Replace with actual image generation API URL
-      { prompt: imagePrompt },
-      {
-        headers: {
-          Authorization: `Bearer ${SECRETS.DALLE_API_KEY}`,
-        },
-      }
-    );
-    return response.data.url; // Assuming response contains the URL of the generated image
-  } catch (error) {
-    console.error("Error generating AI image:", error);
-  }
-}
-
-// Function to download the image
-async function downloadImage(imageUrl) {
-  const imagePath = "./generated-image.jpg"; // Path to save the image locally
-  const writer = fs.createWriteStream(imagePath);
-
-  const response = await axios({
-    url: imageUrl,
-    method: "GET",
-    responseType: "stream",
-  });
-
-  response.data.pipe(writer);
-
-  return new Promise((resolve, reject) => {
-    writer.on("finish", () => resolve(imagePath));
-    writer.on("error", reject);
-  });
-}
-
-
-async function sendTweetWithImage(tweetText, imagePath) {
-  try {
-    // Upload the image to Twitter
-    const mediaId = await twitterClient.v1.uploadMedia(imagePath);
-
-    // Post tweet with image
-    await twitterClient.v2.tweet({
-      text: tweetText,
-      media: {
-        media_ids: [mediaId],
-      },
-    });
-
-    console.log("Tweet with image sent successfully!");
-  } catch (error) {
-    console.error("Error sending tweet with image:", error);
   }
 }
