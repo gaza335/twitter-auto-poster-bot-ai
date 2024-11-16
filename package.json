@@ -12,7 +12,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.3.1",
     "twitter-api-v2": "^1.16.1",
-    "random": "^3.0.6" // Example version
+    "random": "^3.0.6" 
   }
 
 }
