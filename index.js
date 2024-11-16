@@ -4,7 +4,7 @@ const GenAI = require("@google/generative-ai");
 const { TwitterApi } = require("twitter-api-v2");
 const SECRETS = require("./SECRETS");
 
-import random
+
 num = random.randint(1, 6)
 
 imagepath = require("./num");
