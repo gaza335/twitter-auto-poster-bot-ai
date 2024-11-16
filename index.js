@@ -60,7 +60,7 @@ async function sendTweet(tweetText, imagePath) {
     console.error("Error sending tweet:", error);
   }
 }
-}
+
 
 
 
