@@ -5,9 +5,15 @@ const { TwitterApi } = require("twitter-api-v2");
 const SECRETS = require("./SECRETS");
 
 
-num = random.randint(1, 6)
+// Import the `random` library
+const random = require('random');
 
-imagepath = require("./num");
+// Generate a random integer between 1 and 6
+const num = random.int(1, 6);
+
+// Import an image path using the generated number
+const imagepath = require(`./${num}`);
+
 
 const twitterClient = new TwitterApi({
   appKey: SECRETS.APP_KEY,
