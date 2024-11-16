@@ -5,17 +5,6 @@ const { TwitterApi } = require("twitter-api-v2");
 const SECRETS = require("./SECRETS");
 
 
-const random = require('random');
-
-// Generate a random integer between 1 and 6
-const num = random.int(1, 6);
-
-// Dynamically construct the path to the image
-const imagePath = `${num}.jpg`; // Use backticks for template literals
-
-console.log(`Generated random number: ${num}`);
-console.log(`Path to the image: ${imagePath}`);
-
 
 
 const twitterClient = new TwitterApi({
@@ -45,27 +34,14 @@ async function run() {
   const response = await result.response;
   const text = response.text();
   console.log(text);
-  sendTweet(text,imagePath);
+  sendTweet(text);
 }
 
 run();
 
-async function sendTweet(tweetText, imagePath) {
+async function sendTweet(tweetText) {
   try {
-    let mediaId;
-
-    if (imagePath) {
-      // Upload the image and retrieve the media ID
-      const media = await twitterClient.v1.uploadMedia(imagePath);
-      mediaId = media.media_id_string;
-    }
-
-    // Send the tweet with or without the media ID
-    const tweetData = imagePath
-      ? { status: tweetText, media_ids: [mediaId] }
-      : { status: tweetText };
-
-    await twitterClient.v1.post('statuses/update.json', tweetData);
+    await twitterClient.v2.tweet(tweetText);
     console.log("Tweet sent successfully!");
   } catch (error) {
     console.error("Error sending tweet:", error);
