@@ -11,7 +11,7 @@ const random = require('random');
 const num = random.int(1, 6);
 
 // Dynamically construct the path to the image
-const imagePath = `./${num}.jpg`; // Use backticks for template literals
+const imagePath = `${num}.jpg`; // Use backticks for template literals
 
 console.log(`Generated random number: ${num}`);
 console.log(`Path to the image: ${imagePath}`);
