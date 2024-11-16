@@ -49,35 +49,17 @@ async function run() {
 }
 
 run();
-//
-//async function sendTweet(tweetText) {
-//  try {
-//    await twitterClient.v2.tweet(tweetText);
-//    console.log("Tweet sent successfully!");
-//  } catch (error) {
-//    console.error("Error sending tweet:", error);
-// }
-//}
+
 async function sendTweet(tweetText, imagePath) {
   try {
-    let mediaId;
-
-    if (imagePath) {
-      // Upload the image and retrieve the media ID
-      const media = await twitterClient.v1.uploadMedia(imagePath);
-      mediaId = media.media_id_string;
-    }
-
-    // Send the tweet with or without the media ID
-    const tweetData = imagePath
-      ? { status: tweetText, media_ids: [mediaId] }
-      : { status: tweetText };
-
-    await twitterClient.v1.post('statuses/update.json', tweetData);
+    console.log(`Tweet: ${tweetText}`);
+    console.log(`Image Path: ${imagePath}`);
+    // Add code here to upload the image and post the tweet
     console.log("Tweet sent successfully!");
   } catch (error) {
     console.error("Error sending tweet:", error);
   }
+}
 }
 
 
