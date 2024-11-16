@@ -4,6 +4,11 @@ const GenAI = require("@google/generative-ai");
 const { TwitterApi } = require("twitter-api-v2");
 const SECRETS = require("./SECRETS");
 
+import random
+num = random.randint(1, 6)
+
+imagepath = require("./num");
+
 const twitterClient = new TwitterApi({
   appKey: SECRETS.APP_KEY,
   appSecret: SECRETS.APP_SECRET,
@@ -31,16 +36,40 @@ async function run() {
   const response = await result.response;
   const text = response.text();
   console.log(text);
-  sendTweet(text);
+  sendTweet(text,imagepath);
 }
 
 run();
-
-async function sendTweet(tweetText) {
+//
+//async function sendTweet(tweetText) {
+//  try {
+//    await twitterClient.v2.tweet(tweetText);
+//    console.log("Tweet sent successfully!");
+//  } catch (error) {
+//    console.error("Error sending tweet:", error);
+// }
+//}
+async function sendTweet(tweetText, imagePath) {
   try {
-    await twitterClient.v2.tweet(tweetText);
+    let mediaId;
+
+    if (imagePath) {
+      // Upload the image and retrieve the media ID
+      const media = await twitterClient.v1.uploadMedia(imagePath);
+      mediaId = media.media_id_string;
+    }
+
+    // Send the tweet with or without the media ID
+    const tweetData = imagePath
+      ? { status: tweetText, media_ids: [mediaId] }
+      : { status: tweetText };
+
+    await twitterClient.v1.post('statuses/update.json', tweetData);
     console.log("Tweet sent successfully!");
   } catch (error) {
     console.error("Error sending tweet:", error);
   }
 }
+
+
+
