@@ -5,14 +5,17 @@ const { TwitterApi } = require("twitter-api-v2");
 const SECRETS = require("./SECRETS");
 
 
-// Import the `random` library
 const random = require('random');
 
 // Generate a random integer between 1 and 6
 const num = random.int(1, 6);
 
-// Import an image path using the generated number
-const imagepath = require(`./${num}`);
+// Dynamically construct the path to the image
+const imagePath = `./${num}.jpg`;
+
+console.log(`Generated random number: ${num}`);
+console.log(`Path to the image: ${imagePath}`);
+
 
 
 const twitterClient = new TwitterApi({
